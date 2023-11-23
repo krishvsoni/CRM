@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import LoginUserForm,CreateUserForm
 from django.contrib.auth.models import auth 
 from django.contrib.auth import authenticate 
+from django.contrib.auth.decorators import login_required 
 
 
 # - Home page
@@ -49,7 +50,7 @@ def my_login(request):
                 auth.login(request,user)
 
                 
-                #return redirect('
+                return redirect("dashboard")
     context = {'form2':form}
     return render(request,'my-login.html',context=context)             
 
@@ -62,3 +63,15 @@ def user_logout(request):
 
     messages.success(request, "Logged out successfully!")
     return redirect("my-login")
+
+
+# - Dashboard 
+@login_required(login_url='my-login')
+def dashboard(request):
+
+    return render(request,'dashboard.html')
+
+
+
+def creator(request):
+        return render(request,'creator.html')
