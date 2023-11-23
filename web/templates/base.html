@@ -1,0 +1,39 @@
+ {% load static %}
+
+<doctype html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <title> Project CRM</title>
+            <link rel="stylesheet" type = "text/css" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
+            <link rel="stylesheet" type = "text/css" href = "{%static 'css/styles.css' %}">
+
+        </head>
+        
+
+     <body> 
+
+        <!-- Create a navbar-->
+        {% include 'navbar.html' %}
+
+        <div class ="container">
+
+            <br>
+
+            {% block content %}
+             
+            
+
+        </div>    
+
+        <script src="{% static 'javascript/app.js' %}"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+     </body>
+
+        
+    </html>    
+
+    {% endblock %}
