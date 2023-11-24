@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginUserForm,CreateUserForm
+from .forms import LoginUserForm, CreateUserForm, CreateRecordForm , UpdateRecordForm
 from django.contrib.auth.models import auth 
 from django.contrib.auth import authenticate 
 from django.contrib.auth.decorators import login_required 
@@ -78,6 +78,74 @@ def dashboard(request):
     context = {'records': my_records}
 
     return render(request, 'dashboard.html', context=context)
+
+
+# - Create Record
+
+@login_required(login_url='my-login')
+def create_record(request):
+    form = CreateRecordForm()
+    
+    if request.method == 'POST':
+        form = CreateRecordForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("dashboard")
+        
+    context = {'form': form}
+
+    return render(request, 'create-record.html',context=context)    
+
+
+# - Update Record
+
+@login_required(login_url = 'mylogin')
+def update_record(request,pk):
+    record = Record.objects.get(id=pk)
+    form = UpdateRecordForm(instance=record)
+
+    if request.method == 'POST':
+        form = UpdateRecordForm(request.POST,instance=record)
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(request, "Your record was updated!")
+
+            return redirect("dashboard")
+        
+    context = {'form':form}
+
+    return render(request,'update-record.html',context=context)
+
+
+ # - Read / View a singular record
+
+@login_required(login_url='my-login')
+def singular_record(request, pk):
+
+    all_records = Record.objects.get(id=pk)
+
+    context = {'record':all_records}
+
+    return render(request, 'view-record.html', context=context)
+
+
+
+# - Delete a singular record
+
+@login_required(login_url='my-login')
+def delete_record(request, pk):
+
+    record = Record.objects.get(id=pk)
+
+    record.delete()
+
+    messages.success(request, "Your record was deleted!")
+
+    return redirect("dashboard")
 
 
 

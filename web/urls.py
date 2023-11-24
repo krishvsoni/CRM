@@ -1,5 +1,8 @@
 from django.urls import path 
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 
 
@@ -16,10 +19,18 @@ urlpatterns = [
 
 
        # - CRUD
+
        path('dashboard',views.dashboard, name="dashboard"),
-       #path('record/<int:pk>', views.singular_record, name="record"),
+       path('create-record', views.create_record, name="create-record"),
+       path('update-record/<int:pk>', views.update_record, name='update-record'),
+       path('record/<int:pk>', views.singular_record, name="record"),
+       path('delete-record/<int:pk>', views.delete_record, name="delete-record"),
 
 
-       path('creator',views.creator, name="creator"),
+       # - Developer/Creator
+       path('developer',views.creator, name="developer"),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

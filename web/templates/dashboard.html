@@ -6,7 +6,7 @@
 
     <hr>
 
-    <a class="btn btn-outline-primary btn-sm" href="{% url '' %}">
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
 
         Create a new record &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
 
@@ -21,7 +21,7 @@
             <tr>
 
                 <th scope="col"> ID </th>
-                <th scope="col"> Full name </th>
+                <th scope="col"> Full Name </th>
                 <th scope="col"> Email </th>
                 <th scope="col"> Phone </th>
                 <th scope="col"> Address </th>
@@ -51,7 +51,7 @@
 
                 <td> {{record.email}} </td>
 
-                <td> {{record.phone}} </td>
+                <td> {{record.phone_number}} </td>
                 <td> {{record.address}} </td>
                 <td> {{record.city}} </td>
                 <td> {{record.province}} </td>
@@ -59,7 +59,7 @@
 
                 <td> {{record.creation_date}} </td>
 
-                
+                <td> <a class="btn btn-primary btn-sm" href="{% url 'record' record.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
 
             </tr>
 
