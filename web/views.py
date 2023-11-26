@@ -23,6 +23,7 @@ def register(request):
         if form.is_valid():
 
             form.save()
+            messages.success(request,"Account Created Successfully")
             return redirect("my-login")
             
 
@@ -53,6 +54,7 @@ def my_login(request):
                 
                 return redirect("dashboard")
     context = {'form2':form}
+    messages.success(request,"Login Successfully")
     return render(request,'my-login.html',context=context)             
 
 
@@ -96,6 +98,7 @@ def create_record(request):
         
     context = {'form': form}
 
+    messages.success(request, "Record created successfully!")
     return render(request, 'create-record.html',context=context)    
 
 
@@ -148,6 +151,7 @@ def delete_record(request, pk):
     return redirect("dashboard")
 
 
+# - Developer 
 
 def creator(request):
         return render(request,'creator.html')
