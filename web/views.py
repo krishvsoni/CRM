@@ -5,13 +5,20 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required 
 from .models import Record 
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_protect
+
+
 
 # - Home page
+
+@csrf_protect
 def home(request):
     return render(request, 'index.html')
 
 
-# - Register User 
+# - Register User
+#  
+@csrf_protect
 def register(request):
 
     form = CreateUserForm()
@@ -34,6 +41,8 @@ def register(request):
 
 
 # - Login User
+@csrf_protect
+
 def my_login(request):
 
     form = LoginUserForm()
@@ -59,6 +68,7 @@ def my_login(request):
 
 
 # - Logout User
+@csrf_protect
 
 def user_logout(request):
 
@@ -71,6 +81,7 @@ def user_logout(request):
 
 
 # - Dashboard 
+@csrf_protect
 
 @login_required(login_url='my-login')
 def dashboard(request):
@@ -83,6 +94,7 @@ def dashboard(request):
 
 
 # - Create Record
+@csrf_protect
 
 @login_required(login_url='my-login')
 def create_record(request):
@@ -103,6 +115,7 @@ def create_record(request):
 
 
 # - Update Record
+@csrf_protect
 
 @login_required(login_url = 'mylogin')
 def update_record(request,pk):
@@ -125,6 +138,7 @@ def update_record(request,pk):
 
 
  # - Read / View a singular record
+@csrf_protect
 
 @login_required(login_url='my-login')
 def singular_record(request, pk):
@@ -138,6 +152,8 @@ def singular_record(request, pk):
 
 
 # - Delete a singular record
+
+@csrf_protect
 
 @login_required(login_url='my-login')
 def delete_record(request, pk):
