@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['client-craft.azurewebsites.net','azurewebsites.net']
 
-
 # Application definition
 
 INSTALLED_APPS = [
